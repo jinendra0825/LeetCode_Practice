@@ -1,6 +1,6 @@
 class Solution {
     public int myAtoi(String s) {
-        StringBuilder ans = new StringBuilder();
+        
         int i = 0;
         int num = 0;
         int sign = 1;
