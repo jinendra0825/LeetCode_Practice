@@ -4,44 +4,23 @@ class Solution {
         List<Integer> comb = new ArrayList<>();
 
         Arrays.sort(nums);
-
         combination(nums , 0 , ans , comb);
 
         return ans;
     }
 
-    public static void combination(int arr[] , int i, List<List <Integer>> ans , List<Integer> comb){
-         
-        //  Base Case
+    public static void combination(int arr[] , int i,List<List<Integer>> ans ,List<Integer> comb){
 
-        if(i == arr.length){
-                if(ans.contains(comb)){
-                    return ;
-                }else{
-                    ans.add(new ArrayList<>(comb));
-                return ;
-                }
-                
-        
+        ans.add(new ArrayList<>(comb));
+
+        for (int start = i ; start < arr.length; start++){
+
+            // ⭐ duplicate skip
+            if(start > i && arr[start] == arr[start-1]) continue;
+
+            comb.add(arr[start]);
+            combination(arr , start + 1 , ans , comb);
+            comb.remove(comb.size() - 1);
         }
-
-
-        // Take Condition
-
-        
-
-        comb.add(arr[i]);
-        combination(arr , i + 1 , ans , comb);
-        comb.remove(comb.size() - 1);
-
-
-        // Not take
-        combination(arr , i + 1 , ans , comb);
-    
-
-        
-
-
-
     }
 }
