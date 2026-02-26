@@ -7,6 +7,7 @@ class Solution {
         int[] hash = new int[256];
         Arrays.fill(hash, -1);
 
+        // Sliding ke liye l and r liya hai
         int l = 0, r = 0;
         int maxlen = 0;
 
