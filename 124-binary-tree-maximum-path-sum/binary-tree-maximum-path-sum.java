@@ -23,6 +23,10 @@ class Solution {
     public int height(TreeNode root){
          if(root == null) return 0;
 
+//  Bhai agar negative number aaya to ignore kar do , kyuki vo max bananeme contribute nahi kara raha.
+// Isliye 0 Math.max(0) liya hai // i.e: 0 , -15 ---> 0 // 0,15 ---> 15;
+
+
         int left = Math.max(0 ,  height(root.left));
         int right = Math.max(0 ,  height(root.right));
 
