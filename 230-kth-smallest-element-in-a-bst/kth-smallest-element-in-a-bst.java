@@ -18,14 +18,7 @@ class Solution {
         ArrayList<Integer> ans = new ArrayList<>();
 
         inoedertraversal(root , ans);
-        int cnt = 0;
-        for(Integer e : ans){
-            cnt += 1;
-            if(cnt == k){
-                return e;
-            }
-        }
-        return -2;
+        return ans.get(k-1);
     }
 
     public void inoedertraversal(TreeNode root, ArrayList<Integer> ans){
