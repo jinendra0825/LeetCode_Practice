@@ -14,21 +14,26 @@
  * }
  */
 class Solution {
-    public int kthSmallest(TreeNode root, int k) {
-        ArrayList<Integer> ans = new ArrayList<>();
 
-        inoedertraversal(root , ans);
-        return ans.get(k-1);
+    int count = 0;
+    int ans = -1;
+
+    public int kthSmallest(TreeNode root, int k) {
+        inorder(root, k);
+        return ans;
     }
 
-    public void inoedertraversal(TreeNode root, ArrayList<Integer> ans){
+    public void inorder(TreeNode root, int k){
         if(root == null) return;
 
-        inoedertraversal(root.left , ans);
-        ans.add(root.val);
-        inoedertraversal(root.right, ans);
-        
-        
+        inorder(root.left, k);
 
+        count++;
+        if(count == k){
+            ans = root.val;
+            return;
+        }
+
+        inorder(root.right, k);
     }
 }
