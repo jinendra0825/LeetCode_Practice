@@ -39,10 +39,10 @@ class Solution {
                 }
             }
 
-            ans.add(currlevel);
+            ans.add(0 , currlevel);
         }
 
-        Collections.reverse(ans);
+        // Collections.reverse(ans);
 
         return ans;
     }
