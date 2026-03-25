@@ -20,7 +20,6 @@ class Node {
     }
 };
 */
-
 class Solution {
     public Node connect(Node root) {
 
@@ -28,30 +27,28 @@ class Solution {
 
         Queue<Node> q = new LinkedList<>();
         q.offer(root);
+        q.offer(null); // level marker
+
+        Node prev = null;
 
         while(!q.isEmpty()){
-            int size = q.size();
+            Node curr = q.poll();
 
-            Node prev = null;
+            if(curr == null){
+                prev = null;
 
-            for(int i = 0; i < size; i++){
-                Node curr = q.poll();
-
+                if(!q.isEmpty()){
+                    q.offer(null);
+                }
+            } else {
                 if(prev != null){
                     prev.next = curr;
                 }
                 prev = curr;
 
-                if(curr.left != null){
-                    q.offer(curr.left);
-                }
-                if(curr.right != null){
-                    q.offer(curr.right);
-                }
+                if(curr.left != null) q.offer(curr.left);
+                if(curr.right != null) q.offer(curr.right);
             }
-
-            // last node of level
-            prev.next = null;
         }
 
         return root;
