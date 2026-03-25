@@ -16,45 +16,47 @@
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
+
         if(root == null) return ans;
 
-        boolean sign = true; //Right to left --> 1
-
-        Queue <TreeNode>  q = new LinkedList<>();
+        Queue <TreeNode> q = new LinkedList<>();
         q.offer(root);
+
+        boolean zigzag = false; // false means Left TO right //TRUE MEANS right TO left;
+
         while(!q.isEmpty()){
             int size = q.size();
-            
-
-            List<Integer> comb = new ArrayList<>(size);
-
-            for(int i = 0 ; i < size; i++){
-                comb.add(0);
+            List<Integer> currlevel = new ArrayList<>(size);
+            for(int i = 0; i < size; i++){
+                currlevel.add(0);
             }
 
-            for(int i = 0 ; i <size ; i++){
-                TreeNode temp = q.poll();
-                
-                if(!sign){
-                    comb.set((size -i-1) , temp.val );
-                }else{
-                    comb.set(i , temp.val);
-                }
-                
+            for(int i = 0 ; i <  size; i++){
+                TreeNode curr = q.poll();
+                int index;
 
-                if(temp.left != null){
-                    q.offer(temp.left);
+                
+                if(zigzag){
+                    index = size - i - 1;
+                } else {
+                    index = i;
                 }
-                if(temp.right != null){
-                    q.offer(temp.right);
+
+                currlevel.set(index ,  curr.val);
+
+                if(curr.left != null){
+                    q.offer(curr.left);
                 }
+                if(curr.right != null){
+                    q.offer(curr.right);
+                }
+                
             }
+            zigzag = !zigzag;
+            ans.add(currlevel);
 
-            sign = !sign;
-            ans.add(comb);
         }
 
         return ans;
-
     }
 }
