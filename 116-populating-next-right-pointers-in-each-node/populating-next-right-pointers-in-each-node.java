@@ -20,35 +20,33 @@ class Node {
     }
 };
 */
+
 class Solution {
     public Node connect(Node root) {
+        if(root == null){
+            return null;
+        }
 
-        if(root == null) return root;
+        Node leftMost = root;
 
-        Queue<Node> q = new LinkedList<>();
-        q.offer(root);
-        q.offer(null); // level marker
+        while(leftMost.left != null){  //Works for level
+            
+            Node curr = leftMost;
 
-        Node prev = null;
+            while(curr != null){ //Works in level
 
-        while(!q.isEmpty()){
-            Node curr = q.poll();
+                curr.left.next = curr.right;
 
-            if(curr == null){
-                prev = null;
-
-                if(!q.isEmpty()){
-                    q.offer(null);
+                if(curr.next != null){
+                    curr.right.next = curr.next.left;
                 }
-            } else {
-                if(prev != null){
-                    prev.next = curr;
-                }
-                prev = curr;
 
-                if(curr.left != null) q.offer(curr.left);
-                if(curr.right != null) q.offer(curr.right);
+                curr = curr.next;
             }
+
+            leftMost = leftMost.left;
+
+
         }
 
         return root;
