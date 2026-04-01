@@ -1,6 +1,7 @@
 class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
-         List<List<Integer>> ans = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums);
         boolean[] used = new boolean[nums.length];
 
         combination(nums, used,  new ArrayList<>(), ans);
@@ -13,16 +14,16 @@ class Solution {
 
         if(comb.size() == arr.length){
 
-            if(!ans.contains(comb)){
-                 ans.add(new ArrayList<>(comb));
-            return;
-            }
+            ans.add(new ArrayList<>(comb));
+            return;   
             
         }
 
         for(int i = 0 ; i < arr.length; i++){
 
-            if(used [i]) continue;
+            if(used[i]) continue;
+
+            if(i > 0 && arr[i] == arr[i-1] && !used[i-1]) continue;
 
             comb.add(arr[i]);
             used[i] = true;
