@@ -1,39 +1,36 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-       List<List<Integer>> ans = new ArrayList<>();
-       List<Integer> comb = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
 
-       combination(candidates , 0, target, ans , comb );
-
-       return ans;
+        combination(candidates , 0 , 0 , target, new ArrayList<>() ,  ans);
+        return ans;
 
 
     }
 
-    public static void combination(int arr[] , int ind, int target, List<List<Integer>> ans, List<Integer> comb){
-
-        // Base condition
-        if(ind == arr.length){
-            if(target == 0){
-                ans.add(new ArrayList(comb));
-                return;
-            }
-
+    public void combination(int arr[], int i, int sum , int target, List<Integer> comb, List<List<Integer>> ans){
+        if(target == 0){
+            ans.add(new ArrayList<>(comb));
             return;
-
         }
+        
+        if(i == arr.length || target < 0) return;
+        
 
-        // Take Condition
-        if(arr[ind] <= target){
-        comb.add(arr[ind]);
-        combination(arr, ind, target - arr[ind] , ans , comb);
-       
-        comb.remove(comb.size() - 1);
-        }
+    //    Take
 
-        // NotTake
-        combination(arr, ind + 1 , target , ans , comb);
+        comb.add(arr[i]);
 
+        combination(arr, i , sum , target - arr[i], comb, ans);
+
+        // Backtrack - skip the elemets
+
+        comb.remove(comb.size()-1);
+
+        // recall for non skipped elements;
+
+        combination(arr, i + 1, sum , target, comb, ans);
+        
 
     }
 
