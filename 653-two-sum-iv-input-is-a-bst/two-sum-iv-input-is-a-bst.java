@@ -1,19 +1,53 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
     public boolean findTarget(TreeNode root, int k) {
-        HashSet<Integer> set = new HashSet<>();
-        return dfs(root, k, set);
+        List<Integer> ans = new ArrayList<>();
+        inorder(root , ans);
+
+        return twoSum(ans, k);
     }
 
-    public boolean dfs(TreeNode node, int k, HashSet<Integer> set){
-        if(node == null) return false;
+    public void inorder(TreeNode root, List<Integer> ans){
+        if(root == null) return;
 
-        // check if pair exists
-        if(set.contains(k - node.val)){
-            return true;
+        inorder(root.left,  ans);
+        ans.add(root.val);
+        inorder(root.right, ans);
+
+        return;
+    }
+
+    public boolean twoSum(List<Integer> ans, int target){
+        int i = 0;
+        int j = ans.size() - 1;
+
+        while(i < j){
+            int sum = ans.get(i) + ans.get(j);
+
+            if(sum == target) return true;
+
+            else if(sum < target){
+                i++;
+            }else{
+                j--;
+            }
         }
 
-        set.add(node.val);
 
-        return dfs(node.left, k, set) || dfs(node.right, k, set);
+        return false;
     }
 }
