@@ -32,7 +32,46 @@
 //     }
 // }
 
-// GPT ANSWER
+// Somewhat optimal by referrring answer
+// class Solution {
+//     public List<Integer> solveQueries(int[] nums, int[] queries) {
+//         int n = nums.length;
+
+//         // Step 1: map value → indices
+//         Map<Integer, List<Integer>> map = new HashMap<>();
+
+//         for (int i = 0; i < n; i++) {
+//             map.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);
+//         }
+
+//         List<Integer> result = new ArrayList<>();
+
+//         // Step 2: process queries
+//         for (int q : queries) {
+//             int val = nums[q];
+//             List<Integer> list = map.get(val);
+
+//             int ans = Integer.MAX_VALUE;
+
+//             // check all same-value indices
+//             for (int idx : list) {
+//                 if (idx == q) continue;
+
+//                 int diff = Math.abs(idx - q);
+//                 int dist = Math.min(diff, n - diff);
+
+//                 ans = Math.min(ans, dist);
+//             }
+
+//             result.add(ans == Integer.MAX_VALUE ? -1 : ans);
+//         }
+
+//         return result;
+//     }
+// }
+
+// Gpt Answer By Binary Search
+
 class Solution {
     public List<Integer> solveQueries(int[] nums, int[] queries) {
         int n = nums.length;
