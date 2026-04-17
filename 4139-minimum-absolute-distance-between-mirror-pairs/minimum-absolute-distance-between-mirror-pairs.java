@@ -1,12 +1,9 @@
-import java.util.*;
-
 class Solution {
     public int minMirrorPairDistance(int[] nums) {
         HashMap<Integer, Integer> map = new HashMap<>();
         int ans = Integer.MAX_VALUE;
 
         for (int i = 0; i < nums.length; i++) {
-
             
             if (map.containsKey(nums[i])) {
                 int j = map.get(nums[i]);
