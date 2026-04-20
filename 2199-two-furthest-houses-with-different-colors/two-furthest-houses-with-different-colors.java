@@ -1,18 +1,19 @@
 class Solution {
     public int maxDistance(int[] arr) {
-        int i =0;
-        int j = arr.length-1;
-        int ans =0;
+        int n = arr.length;
+        int ans = 0;
+        
+        for(int j = n -1; j >= 0; j--){
+            if (arr[j] != arr[0]) {
+                ans = Math.max(ans, j - 0);
+                break;
+            }
+        }
 
-        while(i < j){
-            int curr = arr[i];
-
-            if(curr == arr[j]){
-                j--;
-            }else if(curr != arr[j]){
-                ans = Math.max(ans , (j - i));
-                i++;
-                j = arr.length -1;
+        for(int i = 0 ; i < n; i++){
+            if(arr[i] != arr[n-1]){
+                ans = Math.max(ans, (n -1) - i);
+                break;
             }
         }
 
