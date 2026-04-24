@@ -1,37 +1,23 @@
 class Solution {
     public int furthestDistanceFromOrigin(String moves) {
-        int cnt =0;
+        int left =0;
+        int right = 0;
+        int dash = 0;
         for(int i = 0 ; i < moves.length() ; i++){
             
             char ch = moves.charAt(i);
 
             if(ch =='L'){
-                cnt++;
+                left++;
             }else if(ch == 'R'){
-                cnt--;
+                right++;
             }else {
-                cnt++;
+                dash++;
             }
 
 
         }
 
-        int cnt2 =0;
-        for(int i = 0 ; i < moves.length() ; i++){
-            
-            char ch = moves.charAt(i);
-
-            if(ch =='L'){
-                cnt2--;
-            }else if(ch == 'R'){
-                cnt2++;
-            }else {
-                cnt2++;
-            }
-
-
-        }
-
-        return Math.max(Math.abs(cnt) , Math.abs(cnt2));
+        return Math.abs(right - left) + dash;
     }
 }
