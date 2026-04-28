@@ -11,12 +11,10 @@ class Solution {
                 i++;
                 continue;
             }
-
             if (!Character.isLetterOrDigit(end)) {
                 j--;
                 continue;
             }
-
             if(start != end){
                 return false;
             }
