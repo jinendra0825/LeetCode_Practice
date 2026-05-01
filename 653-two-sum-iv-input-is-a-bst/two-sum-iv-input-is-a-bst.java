@@ -14,9 +14,9 @@
  * }
  */
 class Solution {
-    public boolean findTarget(TreeNode root, int k) {
+    public boolean findTarget(TreeNode node, int k) {
         List<Integer> ans = new ArrayList<>();
-        inorder(root , ans);
+        inorder(node , ans);
 
         return twoSum(ans, k);
     }
