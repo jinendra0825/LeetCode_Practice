@@ -1,17 +1,17 @@
 class Solution {
     public String addBinary(String a, String b) {
-        int i = a.length() - 1;
+        int j = a.length() - 1;
         int k = b.length() - 1;
         int carry = 0;
 
         StringBuilder result = new StringBuilder();
 
-        while (i >= 0 || k >= 0 || carry != 0) {
+        while (j >= 0 || k >= 0 || carry != 0) {
             int sum = carry;
 
-            if (i >= 0) {
-                sum += a.charAt(i) - '0';
-                i--;
+            if (j >= 0) {
+                sum += a.charAt(j) - '0';
+                j--;
             }
 
             if (k >= 0) {
