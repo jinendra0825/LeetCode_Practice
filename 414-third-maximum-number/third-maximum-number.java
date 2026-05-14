@@ -1,34 +1,35 @@
 class Solution {
     public int thirdMax(int[] nums) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>(
-        );
-        HashSet<Integer> set = new HashSet<>();
 
+        Long first = null;
+        Long second = null;
+        Long third = null;
 
-        for(int i = 0 ; i < nums.length ; i++){
+        for (int num : nums) {
 
-            if(set.contains(nums[i])) continue;
+            long n = num;
 
-            set.add(nums[i]);
-            pq.offer(nums[i]);
+            // skip duplicates
+            if ((first != null && n == first) ||
+                (second != null && n == second) ||
+                (third != null && n == third)) {
+                continue;
+            }
 
-            if(pq.size() > 3){
-                pq.poll();
+            if (first == null || n > first) {
+                third = second;
+                second = first;
+                first = n;
+            }
+            else if (second == null || n > second) {
+                third = second;
+                second = n;
+            }
+            else if (third == null || n > third) {
+                third = n;
             }
         }
 
-
-        if (pq.size() < 3) {   // Are bhai vo pehle max store kar raha hai or min ko pop kar raha hai.
-        // Agar third nahi mila to pura queue khali karke last wala element dena padega jo ki MAX hai.
-
-
-            while (pq.size() > 1) {
-                pq.poll();
-            }
-
-            return pq.peek();
-        }
-
-        return pq.peek();
+        return third == null ? first.intValue() : third.intValue();
     }
 }
