@@ -1,6 +1,5 @@
-import java.util.*;
-
 class Solution {
+
     public boolean canFinish(int numCourses, int[][] prerequisites) {
 
         List<List<Integer>> adj = new ArrayList<>();
@@ -9,43 +8,50 @@ class Solution {
             adj.add(new ArrayList<>());
         }
 
-        int[] indegree = new int[numCourses];
-
         // Build graph
         for (int[] edge : prerequisites) {
             int course = edge[0];
             int prereq = edge[1];
 
             adj.get(prereq).add(course);
-            indegree[course]++;
         }
 
-        Queue<Integer> q = new LinkedList<>();
+        boolean[] vis = new boolean[numCourses];
+        boolean[] pathVis = new boolean[numCourses];
 
-        // Add all nodes with indegree 0
         for (int i = 0; i < numCourses; i++) {
-            if (indegree[i] == 0) {
-                q.offer(i);
-            }
-        }
-
-        int count = 0;
-
-        while (!q.isEmpty()) {
-
-            int node = q.poll();
-            count++;
-
-            for (int neighbor : adj.get(node)) {
-
-                indegree[neighbor]--;
-
-                if (indegree[neighbor] == 0) {
-                    q.offer(neighbor);
+            if (!vis[i]) {
+                if (dfs(i, adj, vis, pathVis)) {
+                    return false;   // Cycle found
                 }
             }
         }
 
-        return count == numCourses;
+        return true;   // No cycle
+    }
+
+    private boolean dfs(int node, List<List<Integer>> adj,
+                        boolean[] vis, boolean[] pathVis) {
+
+        vis[node] = true;
+        pathVis[node] = true;
+
+        for (int neighbor : adj.get(node)) {
+
+            if (!vis[neighbor]) {
+
+                if (dfs(neighbor, adj, vis, pathVis)) {
+                    return true;
+                }
+
+            } else if (pathVis[neighbor]) {
+                return true;
+            }
+        }
+
+        // Backtrack
+        pathVis[node] = false;
+
+        return false;
     }
 }
