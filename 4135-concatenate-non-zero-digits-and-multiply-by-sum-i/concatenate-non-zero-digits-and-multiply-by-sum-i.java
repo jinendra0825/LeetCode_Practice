@@ -1,38 +1,21 @@
 class Solution {
     public long sumAndMultiply(int n) {
 
-        long newNum = 0;
+        String num = Integer.toString(n);
+
+        long x = 0;
         int sum = 0;
-        while(n > 0){
-            int digit = n % 10;
 
-            if(digit == 0){
-                n = n /10;
-                continue;
+        for (int i = 0; i < num.length(); i++) {
+            char ch = num.charAt(i);
+
+            if (ch != '0') {
+                int digit = ch - '0';
+                x = x * 10 + digit;
+                sum += digit;
             }
-
-            sum += digit;
-
-            newNum = newNum * 10 + digit;
-            n = n /10;
         }
 
-        long reverse = Reverse(newNum);
-
-        return reverse * sum;
-    }
-
-    public long Reverse(long n){
-        long num = 0;
-
-        while(n > 0){
-            long digit = n % 10;
-
-            num = num * 10 + digit;
-
-            n = n / 10;
-        }
-
-        return num;
+        return x * sum;
     }
 }
