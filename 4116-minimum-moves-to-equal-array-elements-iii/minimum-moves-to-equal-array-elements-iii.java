@@ -3,18 +3,31 @@ class Solution {
         int n = nums.length; 
         int max = Integer.MIN_VALUE;
 
-        for(int i = 0 ; i < n ; i++){
+
+        // for(int i = 0 ; i < n ; i++){
+        //     if(nums[i] > max){
+        //         max = nums[i];
+        //     }
+        // }
+
+        // int ans = 0;
+
+        // for(int i = 0 ; i < n; i++){
+        //     ans += max - nums[i];
+        // }
+
+        // return ans;
+
+        int sum = 0;
+
+        for(int i = 0 ; i < n; i++){
+            sum += nums[i];
+
             if(nums[i] > max){
                 max = nums[i];
             }
         }
 
-        int ans = 0;
-
-        for(int i = 0 ; i < n; i++){
-            ans += max - nums[i];
-        }
-
-        return ans;
+        return max * n - sum;
     }
 }
